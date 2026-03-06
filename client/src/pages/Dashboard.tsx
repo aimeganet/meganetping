@@ -12,7 +12,10 @@ import {
 } from "recharts";
 import { Link } from "wouter";
 
+import { useLanguage } from "@/lib/LanguageContext";
+
 export default function Dashboard() {
+  const { t } = useLanguage();
   const totalDevices = mockDevices.length;
   const offlineDevices = mockDevices.filter(d => d.status === 'offline').length;
   const warningDevices = mockDevices.filter(d => d.status === 'warning').length;
@@ -21,32 +24,32 @@ export default function Dashboard() {
 
   const stats = [
     { 
-      title: "Network Health", 
+      title: t("networkHealth"), 
       value: `${healthScore}%`, 
       icon: Activity, 
       color: "text-primary",
-      desc: "Based on device status"
+      desc: t("healthDesc")
     },
     { 
-      title: "Total Devices", 
+      title: t("totalDevices"), 
       value: totalDevices, 
       icon: Server, 
       color: "text-blue-400",
-      desc: "Active monitored nodes"
+      desc: t("totalDesc")
     },
     { 
-      title: "Offline Nodes", 
+      title: t("offlineNodes"), 
       value: offlineDevices, 
       icon: WifiOff, 
       color: "text-destructive",
-      desc: "Requires immediate attention"
+      desc: t("offlineDesc")
     },
     { 
-      title: "Warnings", 
+      title: t("warnings"), 
       value: warningDevices, 
       icon: AlertTriangle, 
       color: "text-warning",
-      desc: "High latency or packet loss"
+      desc: t("warningDesc")
     }
   ];
 
@@ -54,7 +57,7 @@ export default function Dashboard() {
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="flex justify-between items-end">
         <div>
-          <h1 className="text-3xl font-display font-bold tracking-tight">Overview</h1>
+          <h1 className="text-3xl font-display font-bold tracking-tight">{t("overview")}</h1>
           <p className="text-muted-foreground mt-1">Real-time network status and metrics</p>
         </div>
       </div>
